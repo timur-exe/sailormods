@@ -13,9 +13,11 @@ bot1 = ["@alice_ya_bot", 8310045254]
 @loader.tds
 class AliceGPT(loader.Module):
      """ALICE GPT"""
+    
     strings = {
-    "name": "AliceGPT",
+        "name": "AliceGPT",
     }
+    
     @loader.command()
     async def alice(self, message):
         """<текст> - запрос к Алисе"""
@@ -34,24 +36,33 @@ class AliceGPT(loader.Module):
             
             if "Начинаю творить, вернусь через несколько секунд" in response1.text:
                 response2 = await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
-                await utils.answer(message, f" 🤷🏼‍♀️ <b>твой вопрос:</b> \n{text}\n\n💅🏻 <b>ответ Алисы:</b>\n{response2.photo}")
-                await self._client.forward_messages(chat, {response2}, me)
+                        im = await get_image(self, m)
+                        if not im:
+                         return
+                         im.is_webp = not im.is_webp
+                      await go_out(self, m, im, im.image)
                 await response.delete()
                 await response1.delete()
                 await response2.delete()
                 return
                 elif "Рисую, через несколько секунд будет готово" in response1.text:
                 response2 = await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
-                await utils.answer(message, f" 🤷🏼‍♀️ <b>твой вопрос:</b> \n{text}\n\n💅🏻 <b>ответ Алисы:</b>\n{response2.photo}")
-                await self._client.forward_messages(chat, {response2}, me)
+                im = await get_image(self, m)
+                        if not im:
+                         return
+                         im.is_webp = not im.is_webp
+                      await go_out(self, m, im, im.image)
                 await response.delete()
                 await response1.delete()
                 await response2.delete()
                 return
                 elif "Дайте мне несколько секунд" in response1.text:
                 response2 = await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
-                await utils.answer(message, f" 🤷🏼‍♀️ <b>твой вопрос:</b> \n{text}\n\n💅🏻 <b>ответ Алисы:</b>\n{response2.photo}")
-                await self._client.forward_messages(chat, {response2}, me)
+                im = await get_image(self, m)
+                        if not im:
+                         return
+                         im.is_webp = not im.is_webp
+                      await go_out(self, m, im, im.image){response2}, me)
                 await response.delete()
                 await response1.delete()
                 await response2.delete()
