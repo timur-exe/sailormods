@@ -57,7 +57,7 @@ class AliceGPT(loader.Module):
                 await response.delete()
                 await response1.delete()
                 await response2.delete()
-             return
+                return
             else:
              await utils.answer(message, f" 🤷🏼‍♀️ <b>твой вопрос:</b> \n{text}\n\n💅🏻 <b>ответ Алисы:</b>\n{response1.text}")
              await response.delete()
