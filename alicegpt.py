@@ -14,7 +14,7 @@ bot1 = ["@alice_ya_bot", 8310045254]
 class AliceGPT(loader.Module):
      """ALICE GPT"""
             	
-    @loader.command()
+        @loader.command()
     async def alice(self, message):
         """<текст> - запрос к Алисе"""
         chat = bot1[1]
