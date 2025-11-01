@@ -71,6 +71,6 @@ class AliceGPT(loader.Module):
         async with message.client.conversation(bot1[0]) as conv:
             response = await conv.send_message(text)
             response1 = await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
-            await utils.answer(message, "✅<b>Контекст успешно очищен!</b>")
+            await utils.answer(message, "✅<b>Контекст успешно сброшен!</b>")
             await response.delete()
             await response1.delete()
