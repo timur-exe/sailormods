@@ -39,8 +39,8 @@ class AliceGPT(loader.Module):
              await utils.answer(message, f" 🤷🏼‍♀️ <b>твой вопрос:</b> \n{text}\n\n💅🏻 <b>ответ Алисы:</b>\n{response2.photo}")
     await self._client.forward_messages(chat, {response2}, me)
     await response.delete()
-             await response1.delete()
-             await response2.delete()
+    await response1.delete()
+    await response2.delete()
              return
             elif "Рисую, через несколько секунд будет готово" in response1.text:
              response2 = await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
