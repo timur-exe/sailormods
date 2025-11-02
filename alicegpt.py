@@ -47,13 +47,27 @@ class AliceGPT(loader.Module):
             
             response1 = await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
             
-            if "Рисую, через несколько секунд будет готово" or "Дайте мне несколько секунд" or "Начинаю творить, вернусь через несколько секунд" in response1.text:
+            if "Рисую, через несколько секунд будет готово" in response1.text:
              response2 = await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
              await message.client.send_file(message.to_id, response2.media)
              await response.delete()
              await response1.delete()
              await response2.delete()
              return
+            elif "Дайте мне несколько секунд" in response1.text:
+             response2 = await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
+             await message.client.send_file(message.to_id, response2.media)
+             await response.delete()
+             await response1.delete()
+             await response2.delete()
+             return   
+            elif "Начинаю творить, вернусь через несколько секунд" in response1.text:
+             response2 = await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
+             await message.client.send_file(message.to_id, response2.media)
+             await response.delete()
+             await response1.delete()
+             await response2.delete()
+             return    
             else:
              await utils.answer(message, f"❓<b>Вопрос:</b> \n{text}\n\n🤖 <b>Ответ нейросети:</b>\n{response1.text}")
              await response.delete()
