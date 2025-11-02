@@ -1,6 +1,6 @@
 version = (1, 0, 0)
 
-# meta developer: @RUIS_VlP, @matubuntu
+# meta developer: 
 
 import random
 from datetime import timedelta
@@ -9,27 +9,14 @@ from telethon import functions
 from telethon.tl.types import Message
 from .. import loader, utils
 
-bot = ["@GPTChatRBot", 5989217330]
 bot1 = ["@alice_ya_bot", 8310045254]
 @loader.tds
 class AliceGPT(loader.Module):
-    """ChatGPT 3, Gigachat без API ключа и с контекстом. Бот, который используется для запросов: @Gigachat_bot и @GPTChatRBot. Модуль распространяется по лицензии MIT."""
+    """Нейросеть Алиса"""
 
     strings = {
         "name": "AliceGPT",
     }
-            	
-    @loader.command()
-    async def gptdelcmd(self, message):
-        """- очищает историю переписки с нейросетью(контекст)"""
-        chat = bot[1]
-        text = "/clear"
-        async with message.client.conversation(bot[0]) as conv:
-            response = await conv.send_message(text)
-            response1 = await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
-            await utils.answer(message, "✅<b>Контекст успешно очищен!</b>")
-            await response.delete()
-            await response1.delete()
            
     @loader.command()
     async def alice(self, message):
@@ -38,9 +25,9 @@ class AliceGPT(loader.Module):
         reply = await message.get_reply_message()
         text = reply.raw_text if reply else message.text[5:]
         if len(text) < 3:
-         await utils.answer(message, "🚫<b>Ошибка!\nСлишком маленький запрос.</b>")
+         await utils.answer(message, "🙅🏻‍♀️<b>Ошибка!\nСлишком короткий запрос.</b>")
          return
-        await utils.answer(message, "🤖<b>Нейросеть обрабатывает ваш запрос...</b>")
+        await utils.answer(message, "🤷🏻‍♀️<b>Алиса думает...</b>")
         async with message.client.conversation(bot1[0]) as conv:
             
             response = await conv.send_message(text)
@@ -69,7 +56,7 @@ class AliceGPT(loader.Module):
              await response2.delete()
              return    
             else:
-             await utils.answer(message, f"❓<b>Вопрос:</b> \n{text}\n\n🤖 <b>Ответ нейросети:</b>\n{response1.text}")
+             await utils.answer(message, f"💁🏻‍♀️ <b>Ответ Алисы:</b>\n{response1.text}")
              await response.delete()
              await response1.delete()
 
@@ -77,29 +64,12 @@ class AliceGPT(loader.Module):
             	
     @loader.command()
     async def aliceclear(self, message):
-        """- очищает историю переписки с нейросетью(контекст)"""
+        """- очищает историю переписки с Алисой (контекст)"""
         chat = bot1[1]
-        text = "🆕 Перезапустить диалог"
+        text = "/clear"
         async with message.client.conversation(bot1[0]) as conv:
             response = await conv.send_message(text)
             response1 = await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
-            await utils.answer(message, "✅<b>Контекст успешно очищен!</b>")
-            await response.delete()
-            await response1.delete()
-           
-    @loader.command()
-    async def gptcmd(self, message):
-        """<текст> - запрос к нейросети ChatGPT"""
-        chat = bot[1]
-        reply = await message.get_reply_message()
-        text = reply.raw_text if reply else message.text[5:]
-        if len(text) < 3:
-        	await utils.answer(message, "🚫<b>Ошибка!\nСлишком маленький запрос.</b>")
-        	return
-        await utils.answer(message, "🤖<b>Нейросеть обрабатывает ваш запрос...</b>")
-        async with message.client.conversation(bot[0]) as conv:
-            response = await conv.send_message(text)
-            response1 = await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
-            await utils.answer(message, f"❓<b>Вопрос:</b> \n{text}\n\n🤖 <b>Ответ нейросети:</b>\n{response1.text}")
+            await utils.answer(message, "🙎🏻‍♀️<b>Контекст успешно очищен!</b>")
             await response.delete()
             await response1.delete()
