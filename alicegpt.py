@@ -12,7 +12,7 @@ from .. import loader, utils
 bot = ["@GPTChatRBot", 5989217330]
 bot1 = ["@alice_ya_bot", 8310045254]
 @loader.tds
-class AliceGPTMod(loader.Module):
+class AliceGPT(loader.Module):
     """ChatGPT 3, Gigachat без API ключа и с контекстом. Бот, который используется для запросов: @Gigachat_bot и @GPTChatRBot. Модуль распространяется по лицензии MIT."""
 
     strings = {
@@ -47,23 +47,9 @@ class AliceGPTMod(loader.Module):
             
             response1 = await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
             
-            if "Рисую, через несколько секунд будет готово" in response1.text:
+            if "Рисую, через несколько секунд будет готово" or "Дайте мне несколько секунд" or "Начинаю творить, вернусь через несколько секунд" in response1.text:
              response2 = await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
-            await message.client.send_file(message.to_id, response2.media))
-             await response.delete()
-             await response1.delete()
-             await response2.delete()
-             return
-elif "Дайте мне несколько секунд" in response1.text:
-             response2 = await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
-            await message.client.send_file(message.to_id, response2.media))
-             await response.delete()
-             await response1.delete()
-             await response2.delete()
-             return
-            elif "Начинаю творить, вернусь через несколько секунд" in response1.text:
-             response2 = await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
-            await message.client.send_file(message.to_id, response2.media))
+             await message.client.send_file(message.to_id, response2.media)
              await response.delete()
              await response1.delete()
              await response2.delete()
