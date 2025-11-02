@@ -47,9 +47,23 @@ class AliceGPTMod(loader.Module):
             
             response1 = await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
             
-            if "💭Ещё чуть-чуть, готовлю ответ" in response1.text:
+            if "Рисую, через несколько секунд будет готово" in response1.text:
              response2 = await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
-             await utils.answer(message, f"❓<b>Вопрос:</b> \n{text}\n\n🤖 <b>Ответ нейросети:</b>\n{response2.text}")
+             await message.client.send_file(message.to_id, response2.media))
+             await response.delete()
+             await response1.delete()
+             await response2.delete()
+             return
+            elif "Дайте мне несколько секунд" in response1.text:
+             response2 = await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
+             await message.client.send_file(message.to_id, response2.media))
+             await response.delete()
+             await response1.delete()
+             await response2.delete()
+             return
+            elif "Начинаю творить, вернусь через несколько секунд" in response1.text:
+             response2 = await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
+             await message.client.send_file(message.to_id, response2.media))
              await response.delete()
              await response1.delete()
              await response2.delete()
