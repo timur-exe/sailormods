@@ -32,7 +32,7 @@ class AliceGPT(loader.Module):
             
             response = await conv.send_message(text)
             
-            response1 = await conv.wait_event(events.NewMessage(incoming=True, from_users=chat)))
+            response1 = await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
             
             if "Рисую, через несколько секунд будет готово" in response1.text:
              response2 = await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
